@@ -1,3 +1,0 @@
-[submodule "engines/books"]
-	path = engines/books
-	url = git@github.com:kylesmile/toybox-books.git
