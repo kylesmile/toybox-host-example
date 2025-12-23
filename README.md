@@ -10,10 +10,9 @@ I wanted to host multiple Rails apps while keeping costs low, so that I could de
 
 ## Setup
 
-Clone the repository
-
+Clone the repository with submodules:
 ```shell
-git clone https://github.com/kylesmile/toybox-host-example.git
+git clone --recurse-submodules https://github.com/kylesmile/toybox-host-example.git
 ```
 
 Install the version of Ruby specified in the `.ruby-version` file, and the version of Node specified in the `.node-version` file.
@@ -58,7 +57,8 @@ git push origin HEAD --set-upstream
 
 # Set up the engine as a submodule
 cd ../../
-git submodule add --name <engine_name> --reference <remote_url> ./engines/<engine_name>
+git submodule add <remote_url> engines/<engine_name>
+git submodule absorbgitdirs engines/books
 ```
 
 ## License
