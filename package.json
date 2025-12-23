@@ -1,0 +1,17 @@
+{
+  "name": "toybox-host",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  },
+  "scripts": {
+    "build": "node esbuild.js"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.20",
+    "@rolemodel/turbo-confirm": "^2.2.0"
+  },
+  "packageManager": "yarn@4.12.0"
+}

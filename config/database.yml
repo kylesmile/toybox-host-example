@@ -1,0 +1,45 @@
+# ERB still processes things in YAML comments.
+# Putting this in a comment makes editor syntax highlighting happier.
+# <% require_relative "../lib/engine_list" %>
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 100
+
+development:
+  primary:
+    <<: *default
+    database: toybox_development
+# <% Toybox::ENGINE_LIST.each do |engine_name| %>
+  <%= engine_name %>:
+    <<: *default
+    database: toybox_<%= engine_name %>_development
+    migrations_paths: db/<%= engine_name %>_migrate
+# <% end %>
+
+test:
+  primary:
+    <<: *default
+    database: toybox_test
+# <% Toybox::ENGINE_LIST.each do |engine_name| %>
+  <%= engine_name %>:
+    <<: *default
+    database: toybox_<%= engine_name %>_test
+    migrations_paths: db/<%= engine_name %>_migrate
+# <% end %>
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: toybox
+    username: toybox
+    host: <%= ENV["TOYBOX_DATABASE_HOST"] %>
+    port: <%= ENV["TOYBOX_DATABASE_PORT"] %>
+    password: <%= ENV["TOYBOX_DATABASE_PASSWORD"] %>
+# <% Toybox::ENGINE_LIST.each do |engine_name| %>
+  <%= engine_name %>:
+    <<: *primary_production
+    database: toybox_<%= engine_name %>
+    migrations_paths: db/<%= engine_name %>_migrate
+# <% end %>
