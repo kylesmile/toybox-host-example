@@ -6,6 +6,9 @@ inject_into_file "#{name}.gemspec", after: /spec.add_dependency "rails", .*$/ do
   <<-RUBY
 
   spec.add_dependency "slim"
+
+  # TEMP: Remove when there is a Rails release with Minitest 6 compatibility
+  spec.add_development_dependency "minitest", "< 6"
   RUBY
 end
 
@@ -23,6 +26,11 @@ html data-theme-mode="light"
     = stylesheet_link_tag "#{name}/application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body.app-body
+    - flash.each do |kind, message|
+      .alert.alert--flash class="alert--\#{kind}"
+        .alert__message
+          .alert__title = kind.titleize
+          .alert__description = message
     .app__header
       .navbar
         = link_to "#{name.titleize}", root_path
@@ -73,7 +81,7 @@ inject_into_file "lib/#{name}/engine.rb", after: "isolate_namespace #{name.camel
     end
 
     initializer "#{name}.assets.precompile" do |app|
-      app.config.assets.precompile += %w( #{name}/application.css )
+      app.config.assets.precompile += %w[ #{name}/application.css ]
     end
   RUBY
 end
@@ -97,6 +105,19 @@ inject_into_file "app/models/#{name}/application_record.rb", after: "self.abstra
   RUBY
 end
 
+gsub_file "test/dummy/config/database.yml", "  <<: *default\n  database: storage/test.sqlite3" do
+  <<-YAML
+  primary:
+    <<: *default
+    database: storage/test.sqlite3
+  #{name}:
+    <<: *default
+    database: storage/test.sqlite3
+  YAML
+end
+
+gsub_file! "test/dummy/config/routes.rb", "  mount #{name.camelize}::Engine => \"/#{name}\"\n", ""
+
 # Create home page so the engine works out of the box
 create_file "app/views/#{name}/application/home.html.slim" do
   <<-SLIM
@@ -107,11 +128,57 @@ p This is the template home page for your new guest app!
 end
 
 # Set up the root route
-insert_into_file "config/routes.rb", after: "#{name.camelize}::Engine.routes.draw do\n" do
+inject_into_file "config/routes.rb", after: "#{name.camelize}::Engine.routes.draw do\n" do
   <<-RUBY
   root to: "application#home"
   RUBY
 end
 
+inject_into_file "test/dummy/config/application.rb", "require \"slim\"\n", before: "Bundler.require"
+inject_into_class "test/dummy/config/application.rb", "Application", "    config.root_host = \"example.com\"\n"
+
 # Remove ERB layout
 remove_file "app/views/layouts/#{name}/application.html.erb"
+
+inject_into_file ".gitignore", after: "/test/dummy/tmp/" do
+  <<-GITIGNORE
+
+
+/node_modules
+/.yarn/
+
+/test/dummy/app/assets/builds/*
+!/test/dummy/app/assets/builds/.keep
+  GITIGNORE
+end
+
+create_file "app/javascript/#{name}/application.js"
+
+append_to_file "test/test_helper.rb" do
+  <<-RUBY
+FileUtils.chdir File.expand_path("../", __dir__) do
+  system("yarn build:test")
+end
+  RUBY
+end
+
+create_file "package.json" do
+  <<-JSON
+{
+  "name": "#{name}",
+  "type": "module",
+  "packageManager": "yarn@4.12.0",
+  "scripts": {
+    "build:test": "esbuild app/javascript/#{name}/*.* --bundle --sourcemap --format=esm --outdir=test/dummy/app/assets/builds/#{name} --public-path=/assets"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  }
+}
+  JSON
+end
+
+create_file "yarn.lock"
+create_file "test/dummy/app/assets/builds/.keep"
+
+run("yarn install")

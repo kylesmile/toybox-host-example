@@ -11,7 +11,8 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.20",
-    "@rolemodel/turbo-confirm": "^2.2.0"
+    "@rolemodel/turbo-confirm": "^2.2.0",
+    "toybox_books": "portal:./engines/books"
   },
   "packageManager": "yarn@4.12.0"
 }

@@ -322,5 +322,14 @@ __metadata:
     "@hotwired/turbo-rails": "npm:^8.0.20"
     "@rolemodel/turbo-confirm": "npm:^2.2.0"
     esbuild: "npm:^0.27.2"
+    toybox_books: "portal:./engines/books"
   languageName: unknown
+  linkType: soft
+
+"toybox_books@portal:./engines/books::locator=toybox-host%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "toybox_books@portal:./engines/books::locator=toybox-host%40workspace%3A."
+  dependencies:
+    "@hotwired/turbo-rails": "npm:^8.0.20"
+  languageName: node
   linkType: soft
