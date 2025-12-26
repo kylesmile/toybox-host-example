@@ -331,5 +331,6 @@ __metadata:
   resolution: "toybox_books@portal:./engines/books::locator=toybox-host%40workspace%3A."
   dependencies:
     "@hotwired/turbo-rails": "npm:^8.0.20"
+    "@rolemodel/turbo-confirm": "npm:^2.2.0"
   languageName: node
   linkType: soft
