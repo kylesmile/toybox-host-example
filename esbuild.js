@@ -8,8 +8,8 @@ const engines = fs.readdirSync("./engines", { withFileTypes: true })
   .map(file => file.name)
 
 const engineEntries = engines
-  .filter(engineName => fs.existsSync(`./engines/${engineName}/app/javascript/application.js`))
-  .map(engineName => ({ out: `${engineName}/application`, in: `engines/${engineName}/app/javascript/application.js` }))
+  .filter(engineName => fs.existsSync(`./engines/${engineName}/app/javascript/${engineName}/application.js`))
+  .map(engineName => ({ out: `${engineName}/application`, in: `engines/${engineName}/app/javascript/${engineName}/application.js` }))
 
 const context = await esbuild.context({
   entryPoints: [
