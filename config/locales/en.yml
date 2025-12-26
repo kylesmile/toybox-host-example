@@ -29,6 +29,3 @@
 
 en:
   hello: "Hello world"
-  date:
-    formats:
-      semi_short: "%b %d, %Y"
