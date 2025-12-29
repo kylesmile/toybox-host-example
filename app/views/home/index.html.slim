@@ -1,2 +1,18 @@
 .container.container--sm
-  h1 There might be something here someday...
+  h1 Kylecoding.com Toybox
+
+  p Hello, and welcome! This is a place for me to share various "toy" projects (hence the name "toybox"). These may range from small experiments to full apps. While I have no current plans to do so, it is always possible that I may remove any of these in the future. I also make no guarantees of continued development on any of these. Use them at your own risk (see below for the full terms and privacy policy).
+
+  p If one of the full apps takes off, my intent is to migrate it to its own domain, but keep it free and open source, though I make no guarantees about that actually happening.
+
+  p All that said, I am happy to share my toys and I hope others find them useful in some way.
+
+  = render "public_app_list"
+
+  section.legalese
+    details
+      summary Terms of Use
+      = render "terms_of_use"
+    details
+      summary Privacy Policy
+      = render "privacy_policy"
