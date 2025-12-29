@@ -11,5 +11,5 @@ test:
 production:
   adapter: redis
   # References the accessory defined in config/deploy.yml
-  url: redis://valkey
+  url: redis://toybox-valkey
   channel_prefix: toybox_production
