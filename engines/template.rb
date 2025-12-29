@@ -58,6 +58,17 @@ require "#{name}/subdomain"
   RUBY
 end
 
+inject_into_module "lib/#{name}.rb", name.camelize do
+  <<-RUBY
+  GUEST_INFO = {
+    public: true,
+    title: "#{name.humanize}",
+    description: "Description for #{name.humanize}",
+    source_url: "https://github.com"
+  }
+  RUBY
+end
+
 # Add asset precompilation configuration
 inject_into_file "lib/#{name}/engine.rb", after: "isolate_namespace #{name.camelize}\n" do
   <<-RUBY

@@ -1,1 +1,8 @@
-p List of apps goes here
+.app-grid
+  - Toybox::GuestApps.each_public_engine do |engine_module|
+    .card.card--shadow-small
+      .card__header = engine_module::GUEST_INFO[:title]
+      .card__body = engine_module::GUEST_INFO[:description]
+      .card__footer.flex.justify-between
+        = link_to "Source Code", engine_module::GUEST_INFO[:source_url], target: "_blank", rel: "noopener noreferrer"
+        = link_to "Open App", Toybox::GuestApps.engine_url(engine_module), target: "_blank", rel: "noopener noreferrer"

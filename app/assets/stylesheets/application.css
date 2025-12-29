@@ -14,3 +14,36 @@
   --op-color-primary-s: 41%;
   --op-color-primary-l: 29%;
 }
+
+.legalese {
+  dt {
+    font-weight: bold;
+    display: inline;
+
+    &::after {
+      content: ': ';
+    }
+  }
+
+  dd {
+    display: inline;
+  }
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--op-space-small);
+
+  margin-block-start: var(--op-space-medium);
+  margin-block-end: var(--op-space-medium);
+
+  .card__header {
+    font-weight: var(--op-font-weight-bold);
+  }
+
+  .card__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
