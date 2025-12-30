@@ -4,7 +4,7 @@ This is an example of the setup used to host multiple apps within one host Rails
 
 ## The Toybox Concept
 
-For a longer discussion of how this is put together, see my blog post (coming soon). The short version is below.
+For a longer discussion of how this is put together, see my [blog post](https://kylecoding.com/sharing-my-toys). The short version is below.
 
 I wanted to host multiple Rails apps while keeping costs low, so that I could deploy various "toy" projects (thus the "toybox" name). My solution is this repository: a single host Rails app, with guest apps as engines. This allows me to run multiple apps on a single server with significantly less resource usage than directly running multiple Rails apps.
 
