@@ -70,6 +70,7 @@ builder:
 
 ssh:
   user: deploy
+  port: "<%= ENV['TOYBOX_SSH_PORT'] %>"
 
 accessories:
   # Valkey accessory for Action Cable
