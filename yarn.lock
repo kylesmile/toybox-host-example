@@ -211,6 +211,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.4
+  resolution: "@kurkle/color@npm:0.3.4"
+  checksum: 10c0/0e9fd55c614b005c5f0c4c755bca19ec0293bc7513b4ea3ec1725234f9c2fa81afbc78156baf555c8b9cb0d305619253c3f5bca016067daeebb3d00ebb4ea683
+  languageName: node
+  linkType: hard
+
 "@rails/actioncable@npm:>=7.0":
   version: 8.1.100
   resolution: "@rails/actioncable@npm:8.1.100"
@@ -222,6 +229,15 @@ __metadata:
   version: 2.2.0
   resolution: "@rolemodel/turbo-confirm@npm:2.2.0"
   checksum: 10c0/76ecad6a2f485ce820ceec98c030e108ef044e5b191003495e32660561a9d4283788971e7c7a308ee1b9eba61f3dfa0cf9d9fb19052f6dcbbe13669c6c3a4238
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "chart.js@npm:4.5.1"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 10c0/3f2a11dcaae9079e8e6b8ad077e2ae311f04996f9da14815730891e66215ee8b5f2c0eb70b5a156e5bde0f89a41bae13506dc6153e50fd22dcb282b21eec706f
   languageName: node
   linkType: hard
 
@@ -330,7 +346,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "toybox_books@portal:./engines/books::locator=toybox-host%40workspace%3A."
   dependencies:
+    "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.20"
     "@rolemodel/turbo-confirm": "npm:^2.2.0"
+    chart.js: "npm:^4.5.1"
   languageName: node
   linkType: soft
